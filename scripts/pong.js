@@ -13,7 +13,8 @@ const heightBarre = 15
 
 let x = canvas.width / 2;
 let y = canvas.height / 2;
-const speedBall = 2;
+let speedBallX = 2;
+let speedBallY = 2;
 const widthBall = 15;
 let rafID;
 
@@ -52,13 +53,13 @@ function update() {
         x -= speedBall;
         y += speedBall; 
     }*/
-        x += speedBall;
-        y += speedBall; 
-    if(x > canvas.width - widthBall) {
-        x -= speedBall;
+        x += speedBallX;
+        y += speedBallY; 
+    if(x >= canvas.width - widthBall) {
+        speedBallX = -speedBallX;
     }
     if(y > canvas.height - widthBall) {
-        y -= speedBall;
+        speedBallY = -speedBallY;
     }
 }
 
