@@ -1,13 +1,22 @@
 body {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(75, 75, 75);
+    text-align: center;
 }
 
 canvas {
     border: solid rgb(47, 0, 255);
-    background-color: rgb(119, 119, 119);
-    margin: 20px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 1em;
 }
 
-p {
+p,h2 {
     color: white;
+}
+
+#right {
+    margin-left: 2.5em;
+}
+
+#left {
+    margin-right: 2.5em;
 }
