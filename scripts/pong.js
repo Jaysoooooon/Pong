@@ -12,7 +12,7 @@ const widthBarre = 50;
 const heightBarre = 15
 
 let x = canvas.width / 2;
-let y = canvas.height / 2;
+let y = yBarre - heightBarre;
 let speedBallX = 2;
 let speedBallY = 2;
 const widthBall = 15;
@@ -44,23 +44,34 @@ document.addEventListener('keydown', (e) => {
     drawBarre();
 });
 
-function update() {
+function random() {
     const random = Math.floor(Math.random() * 2);
-    /*if(random = 0) {
-        x += speedBall;
-        y += speedBall;
+    speedBallY = -speedBallY;
+
+    if (random === 0) {
+        speedBallX = speedBallX;
     } else {
-        x -= speedBall;
-        y += speedBall; 
-    }*/
+        speedBallX = -speedBallX;
+    }
+}
+
+function update() {
         x += speedBallX;
-        y += speedBallY; 
+        y += speedBallY;
     if(x >= canvas.width - widthBall) {
         speedBallX = -speedBallX;
     }
-    if(y > canvas.height - widthBall) {
+    if(x <= 0 + widthBall) {
+        speedBallX = -speedBallX;
+    }
+    if(y <= 0 + widthBall) {
         speedBallY = -speedBallY;
     }
+    if (y >= canvas.height - widthBall) {
+        cancelAnimationFrame(rafID);
+        resultDisplay.textContent = "Perdu !";
+    }
+
 }
 
 function start() {
@@ -71,6 +82,7 @@ function start() {
 }
 
 start();
+random();
 
 function updateScore() {
   //  loseCondition = score.lose + "s";
@@ -78,6 +90,11 @@ function updateScore() {
 
 resetButton.addEventListener('click', () => {
     score.lose = 0;
+    x = canvas.width / 2;
+    y = yBarre - heightBarre;
+    speedBallX = 2;
+    speedBallY = 2;
+    random();
     updateScore();
     start();
     resultDisplay.textContent = '';
