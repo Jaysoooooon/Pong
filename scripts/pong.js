@@ -3,9 +3,11 @@ const ctx = canvas.getContext("2d");
 const resetButton = document.getElementById("startreset");
 const loseCondition = document.getElementById("score");
 const resultDisplay = document.getElementById("lose");
+const bestScoreEver = document.getElementById("bestscore");
 
 let secondes = 0;
 let timerID = null;
+let bestSecondes = 0;
 
 let xBarre = canvas.width / 2 - 25;
 const yBarre = 470;
@@ -14,7 +16,7 @@ const widthBarre = 50;
 const heightBarre = 15
 
 let x = canvas.width / 2;
-let y = yBarre - heightBarre;
+let y = yBarre - 20;
 let speedBallX = 2;
 let speedBallY = 2;
 const widthBall = 15;
@@ -69,12 +71,16 @@ function update() {
     if(y <= 0 + widthBall) {
         speedBallY = -speedBallY;
     }
+    /*if(y <= yBarre- heightBarre) {
+        speedBallY = -speedBallY;
+    }*/
+
+
     if (y >= canvas.height - widthBall) {
         cancelAnimationFrame(rafID);
         resultDisplay.textContent = "Perdu !";
         stopTimer();
     }
-
 }
 
 function startTimer() {
@@ -88,6 +94,10 @@ function startTimer() {
 function stopTimer() {
     clearInterval(timerID);
     timerID = null;
+    if(secondes > bestSecondes) {
+        bestSecondes = secondes;
+        bestScoreEver.textContent = bestSecondes;
+    }
 }
 
 function start() {
@@ -98,18 +108,17 @@ function start() {
     rafID = requestAnimationFrame(start);
 }
 
-start();
-random();
+drawBall();
+drawBarre();
 
 resetButton.addEventListener('click', () => {
     secondes = 0;
     loseCondition.textContent = '0';
     x = canvas.width / 2;
-    y = yBarre - heightBarre;
+    y = yBarre - 20;
     speedBallX = 2;
     speedBallY = 2;
     random();
-    updateScore();
     start();
     resultDisplay.textContent = '';
 });
