@@ -4,6 +4,8 @@ const resetButton = document.getElementById("startreset");
 const loseCondition = document.getElementById("score");
 const resultDisplay = document.getElementById("lose");
 const bestScoreEver = document.getElementById("bestscore");
+const buttonLeft = document.getElementById("left");
+const buttonRight = document.getElementById("right");
 
 let secondes = 0;
 let timerID = null;
@@ -45,6 +47,15 @@ document.addEventListener('keydown', (e) => {
         default:
             break;
     }
+    drawBarre();
+});
+
+buttonLeft.addEventListener('touchstart', (e) => {
+    if(xBarre > 0) xBarre -= speedBarre;
+    drawBarre();
+});
+buttonRight.addEventListener('touchstart', (e) => {
+    if(xBarre < canvas.width - widthBarre) xBarre += speedBarre;
     drawBarre();
 });
 
