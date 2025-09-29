@@ -13,9 +13,11 @@ let bestSecondes = 0;
 
 let xBarre = canvas.width / 2 - 25;
 const yBarre = 470;
-const speedBarre = 7;
+const speedBarre = 4;
 const widthBarre = 50;
-const heightBarre = 15
+const heightBarre = 15;
+let right = false;
+let left = false;
 
 let x = canvas.width / 2;
 let y = yBarre - 20;
@@ -38,25 +40,27 @@ function drawBarre() {
 }
 
 document.addEventListener('keydown', (e) => {
-    switch (e.key) {
-        case 'ArrowLeft':
-            if(xBarre > 0) xBarre -= speedBarre;
-            break;
-        case 'ArrowRight':
-            if(xBarre < canvas.width - widthBarre) xBarre += speedBarre;
-        default:
-            break;
-    }
-    drawBarre();
+    if(e.key == 'ArrowLeft') left = true;
+    if(e.key == 'ArrowRight') right = true;
 });
 
-buttonLeft.addEventListener('touchstart', (e) => {
-    if(xBarre > 0) xBarre -= speedBarre;
-    drawBarre();
+document.addEventListener('keyup', (e) => {
+    if(e.key == 'ArrowLeft') left = false;
+    if(e.key == 'ArrowRight') right = false;
 });
-buttonRight.addEventListener('touchstart', (e) => {
-    if(xBarre < canvas.width - widthBarre) xBarre += speedBarre;
-    drawBarre();
+
+buttonLeft.addEventListener('touchstart', () => {
+    left = true;
+});
+buttonLeft.addEventListener('touchend', () => {
+    left = false;
+});
+
+buttonRight.addEventListener('touchstart', () => {
+    right = true;
+});
+buttonRight.addEventListener('touchend', () => {
+    right = false;
 });
 
 function random() {
@@ -71,6 +75,12 @@ function random() {
 }
 
 function update() {
+    if (left && xBarre > 0) {
+    xBarre -= speedBarre;
+    }
+    if (right && xBarre < canvas.width - widthBarre) {
+        xBarre += speedBarre;
+    }
     x += speedBallX;
     y += speedBallY;
     if(x >= canvas.width - widthBall) {
@@ -88,7 +98,6 @@ function update() {
 
 
     if (y >= canvas.height - widthBall) {
-        cancelAnimationFrame(rafID);
         resultDisplay.textContent = "Perdu !";
         stopTimer();
     }
