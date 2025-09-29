@@ -26,6 +26,9 @@ let speedBallY = 2;
 const widthBall = 15;
 let rafID;
 
+bestSecondes = localStorage.getItem('bestScore') || 0;
+bestScoreEver.textContent = bestSecondes;
+
 function drawBall() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "red";
@@ -118,6 +121,7 @@ function stopTimer() {
     if(secondes > bestSecondes) {
         bestSecondes = secondes;
         bestScoreEver.textContent = bestSecondes;
+        localStorage.setItem('bestScore', bestSecondes);
     }
 }
 
