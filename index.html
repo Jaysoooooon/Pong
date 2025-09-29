@@ -9,22 +9,20 @@
     <title>Pong</title>
 </head>
 <body>
-    <main>
+    <header>
         <h2>Solo Pong</h2>
         <p>Fait ton meilleur score !</p>
-        <canvas width="300" height="500" id="canva"></canvas>
-    </main>
-    <section>
+    </header>
+    <main>
+        <canvas width="250" height="450" id="canva"></canvas>
         <p id="lose"></p>
-    </section>
-    <section>
-        <p >Meilleur score : <span id="bestscore">0</span> s</p>
+        <p>Meilleur score : <span id="bestscore">0</span> s</p>
         <p>Score : <span id="score">0</span> s</p>
         <button id="startreset">Nouvelle Partie</button>
-    </section>
-    <section><br>
-        <button id="left"><span class="fa-solid fa-arrow-left"></span></button>
-        <button id="right"><span class="fa-solid fa-arrow-right"></span></button>
-    </section>
+        <div><br>
+            <button id="left"><span class="fa-solid fa-arrow-left"></span></button>
+            <button id="right"><span class="fa-solid fa-arrow-right"></span></button>
+        </div>
+    </main>
 </body>
 </html>

@@ -12,7 +12,7 @@ let timerID = null;
 let bestSecondes = 0;
 
 let xBarre = canvas.width / 2 - 25;
-const yBarre = 470;
+const yBarre = canvas.height - 30;
 const speedBarre = 2;
 const widthBarre = 50;
 const heightBarre = 15;

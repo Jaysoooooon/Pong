@@ -13,10 +13,17 @@ p,h2 {
     color: white;
 }
 
-#right {
-    margin-left: 2.5em;
+#right, #left {
+    width: 50px;
+    height: 50px;
+    margin: 20px;
 }
 
-#left {
-    margin-right: 2.5em;
+#lose {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
 }
