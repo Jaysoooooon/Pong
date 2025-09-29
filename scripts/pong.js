@@ -13,7 +13,7 @@ let bestSecondes = 0;
 
 let xBarre = canvas.width / 2 - 25;
 const yBarre = 470;
-const speedBarre = 4;
+const speedBarre = 2;
 const widthBarre = 50;
 const heightBarre = 15;
 let right = false;
@@ -92,12 +92,13 @@ function update() {
     if(y <= 0 + widthBall) {
         speedBallY = -speedBallY;
     }
-    /*if(y <= yBarre- heightBarre) {
+    if (y + widthBall >= yBarre && x >= xBarre && x <= xBarre + widthBarre && speedBallY > 0) {
         speedBallY = -speedBallY;
-    }*/
-
+    }
 
     if (y >= canvas.height - widthBall) {
+        speedBallX = 0;
+        speedBallY = 0;
         resultDisplay.textContent = "Perdu !";
         stopTimer();
     }
