@@ -12,8 +12,8 @@ let timerID = null;
 let bestSecondes = 0;
 
 let xBarre = canvas.width / 2 - 25;
-const yBarre = canvas.height - 30;
-const speedBarre = 2;
+let yBarre = canvas.height - 30;
+const speedBarre = 4;
 const widthBarre = 50;
 const heightBarre = 15;
 let right = false;
@@ -21,10 +21,13 @@ let left = false;
 
 let x = canvas.width / 2;
 let y = yBarre - 20;
-let speedBallX = 2;
-let speedBallY = 2;
+let speedBallX = 1.5;
+let speedBallY = 1.5;
 const widthBall = 15;
 let rafID;
+
+const baseSpeed = speedBallX;
+const maxMultiplicateur = 5;
 
 bestSecondes = localStorage.getItem('bestScore') || 0;
 bestScoreEver.textContent = bestSecondes;
@@ -66,6 +69,16 @@ buttonRight.addEventListener('touchend', () => {
     right = false;
 });
 
+function speedUp() {
+    const maxSpeed = baseSpeed * maxMultiplicateur;
+    if (Math.abs(speedBallX) < maxSpeed) {
+        speedBallX *= 1.05;
+    }
+    if (Math.abs(speedBallY) < maxSpeed) {
+        speedBallY *= 1.05;
+    }
+}
+
 function random() {
     const random = Math.floor(Math.random() * 2);
     speedBallY = -speedBallY;
@@ -88,15 +101,19 @@ function update() {
     y += speedBallY;
     if(x >= canvas.width - widthBall) {
         speedBallX = -speedBallX;
+        speedUp();
     }
     if(x <= 0 + widthBall) {
         speedBallX = -speedBallX;
+        speedUp();
     }
     if(y <= 0 + widthBall) {
         speedBallY = -speedBallY;
+        speedUp();
     }
     if (y + widthBall >= yBarre && x >= xBarre && x <= xBarre + widthBarre && speedBallY > 0) {
         speedBallY = -speedBallY;
+        speedUp();
     }
 
     if (y >= canvas.height - widthBall) {
@@ -137,10 +154,13 @@ drawBall();
 drawBarre();
 
 resetButton.addEventListener('click', () => {
+    cancelAnimationFrame(rafID);
     secondes = 0;
     loseCondition.textContent = '0';
     x = canvas.width / 2;
     y = yBarre - 20;
+    xBarre = canvas.width / 2 - 25;
+    yBarre = canvas.height - 30;
     speedBallX = 2;
     speedBallY = 2;
     random();
