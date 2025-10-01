@@ -21,8 +21,8 @@ let left = false;
 
 let x = canvas.width / 2;
 let y = yBarre - 20;
-let speedBallX = 1.5;
-let speedBallY = 1.5;
+let speedBallX = 2;
+let speedBallY = 2;
 const widthBall = 15;
 let rafID;
 
@@ -113,6 +113,11 @@ function update() {
     }
     if (y + widthBall >= yBarre && x >= xBarre && x <= xBarre + widthBarre && speedBallY > 0) {
         speedBallY = -speedBallY;
+        const hitPoint = (x - (xBarre + widthBarre / 2)) / (widthBarre / 2);
+        speedBallX = hitPoint * 4;
+        if (Math.abs(speedBallX) < 1) {
+            speedBallX = speedBallX < 0 ? -1 : 1;
+        }
         speedUp();
     }
 
